@@ -1,0 +1,69 @@
+
+
+
+Step 3:Create your own team workspace
+
+cd ~/team_workspaces
+cd team-7-ugrobotics && catkin_init_workspace src
+
+# make your entire workspace
+catkin_make
+
+Step 4:Clone your github repository into your "src" folder
+
+cd ~/team_workspaces/team-7-ugrobotics/src
+git clone <your-git-repository>
+git clone
+
+Step 5:Ensure all your dependencies are installed
+
+cd ~/team_workspaces/team-7-ugrobotics/
+sudo apt update
+rosdep install --from-paths ./src --ignore-src -y
+
+Step 6:Compile your solution
+cd ~/team_workspaces/team-7-ugrobotics
+catkin_make
+
+Step 7:Find the current IP of the Robot PC (ubuntu)
+# open a new terminal
+sudo nmap -sn 192.168.1.0/24
+# you will be prompted to provide a password, type: "daust"
+
+# note the IP address of the device with hostname: "ubuntu"
+
+
+Step 8:Create a bash session on the robot using the SSH protocol
+# open a new terminal
+ssh ubuntu@<IP-address-from-step-7>
+# e.g. ssh ubuntu@192.168.1.112
+
+# you will be prompted to provide a password, type: "turtlebot"
+
+
+Step 9: Bring up the robot
+# on the host PC, i.e. terminal with "daust@daust", run:
+roscore
+
+# on the open robot bash session, i.e. "ubuntu@ubuntu:~$", run
+roslaunch turtlebot3_parc turtlebot3_robot.launch
+
+# check that the robot is publishing topics on the ROS network
+
+    # on your host PC:
+roslaunch parc-robot robot.launch 
+# this will launch RViz and show the robot
+
+Step 10: Run your solution
+# on the host PC:
+source ~/team_workspaces/team-7-ugrobotics/devel/setup.bash
+roslaunch maker task_solution.launch  # white lane
+roslaunch pile  task_solution.launch   # black lane
+roslaunch paint  task_solution.launch   # grey lane
+
+roslaunch      task_solution.launch
+
+
+
+
+
